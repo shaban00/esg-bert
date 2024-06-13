@@ -2,7 +2,7 @@
 
 ---
 
-### Domain Specific BERT Model for Text Mining in Sustainable Investing
+## Domain Specific BERT Model for Text Mining in Sustainable Investing
 
 ### Create python virtual environment
 
