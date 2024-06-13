@@ -44,7 +44,7 @@
 6. Install python dependencies
 
    ```python
-   pip install pandas transformers tika tqdm
+   pip install pandas transformers tika tqdm openpyxl
    ```
 
    ```python
