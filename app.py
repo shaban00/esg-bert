@@ -83,20 +83,17 @@ def process_sentences(sentences):
         chunk_result = classifier(chunk)
         results.extend(chunk_result)
 
+
     data_frame = pd.DataFrame(results)
-    output = data_frame.groupby(['label']).mean().sort_values('score', ascending=False)
+    
+    # Filter results with score >= 0.75
+    filtered_results = data_frame[data_frame['score'] >= 0.75]
+    
+    num_sentences = len(sentences)
+    output = filtered_results.groupby('label').size().to_dict()
+    output['Sentences'] = num_sentences
 
-    headers = ['Access_And_Affordability', 'Air_Quality', 'Business_Ethics', 'Business_Model_Resilience', 'Competitive_Behavior', 'Critical_Incident_Risk_Management', 'Customer_Privacy', 'Customer_Welfare', 'Data_Security', 'Director_Removal', 'Ecological_Impacts', 'Employee_Engagement_Inclusion_And_Diversity', 'Employee_Health_And_Safety', 'Energy_Management', 'GHG_Emissions', 'Human_Rights_And_Community_Relations', 'Labor_Practices', 'Management_Of_Legal_And_Regulatory_Framework', 'Physical_Impacts_Of_Climate_Change', 'Product_Design_And_Lifecycle_Management', 'Product_Quality_And_Safety', 'Selling_Practices_And_Product_Labeling', 'Supply_Chain_Management', 'Systemic_Risk_Management', 'Waste_And_Hazardous_Materials_Management', 'Water_And_Wastewater_Management']
-
-    for header in headers:
-        if header not in output.index:
-            output.loc[header] = 0
-
-    output = output.reindex(headers)
-    output = output.iloc[1:]
-    output_dict = output.to_dict()['score']
-
-    return output_dict
+    return output
 
 
 def save_output_to_json(data, filename):

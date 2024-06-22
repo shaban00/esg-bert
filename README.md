@@ -62,12 +62,16 @@
    - "-f" specifies files separted with commas
    - "-o" specifies the JSON output filename. eg: output.json
 
-8. Once the script is done running you can convert the JSON output of CSV and Excel file.
+8. Convert **JSON** output to **CSV**
 
-9. Run the `convert.py` script to convert the JSON output to CSV and Excel
+   **Online**
+
+   - [JSON TO CSV](https://data.page/json/csv)
+
+   **Offline**
 
    ```python
    python convert.py -i "input_filename.json" -o "output_filename"
    ```
 
-   - You will pass in the output file name ('filename.json') you specified in Step 8.
+9. Import CSV into excel for analysis (optional)
